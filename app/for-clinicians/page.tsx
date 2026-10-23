@@ -4,34 +4,33 @@ import { Article, PageShell } from "@/components/site";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = { title: "Proposed clinician platform" };
+export const metadata: Metadata = { title: "For clinicians" };
+
+const primary = cn(buttonVariants(), "h-12 w-fit rounded-[16px] px-5 text-base");
 
 export default function ForCliniciansPage() {
   return (
     <PageShell>
       <Article
-        title="Apply as a clinician"
-        lede="A self-declared role does not grant access to patients. This demonstration ends at pending verification."
+        title="For clinicians"
+        lede="Apply in the demonstration, then explore a fictional worklist. An application never opens a real patient record."
       >
-        <ul className="grid gap-2">
-          <li>Eligible roles would be checked against the relevant professional register.</li>
-          <li>Access would be limited to explicitly assigned patients.</li>
-          <li>Notes would stay in draft until a named clinician signed them.</li>
-          <li>Multi-factor authentication would be required before any real activation.</li>
+        <ul className="grid gap-3 md:grid-cols-2">
+          {[
+            "Submitted, under review, or more information needed.",
+            "Approved, declined, suspended, or expired.",
+            "A verified fictional role can review assigned demonstration patients only.",
+            "Notes stay in draft until a clinician signs them. Corrections are amendments.",
+          ].map((item) => (
+            <li key={item} className="rounded-[16px] border border-[#D7E3E8] bg-white p-4">{item}</li>
+          ))}
         </ul>
-        <article className="rounded-2xl border border-border bg-card p-4">
-          <h2 className="text-xl">Work queue</h2>
-          <p className="mt-1 text-muted-foreground">
-            No patients are assigned. Search and clinical records stay unavailable until a reviewer approves a scope. That reviewer workflow is not live.
-          </p>
-        </article>
-        <div className="flex flex-wrap gap-4">
-          <Link href="/register/clinician" className={cn(buttonVariants(), "h-12 px-5")}>
-            Apply as a clinician
-          </Link>
-          <Link href="/for-patients" className="self-center underline">
-            Proposed patient journey
-          </Link>
+        <p>
+          Live access would require verified credentials, a defined scope, multi-factor authentication and an explicit assignment. This prototype does not perform those checks and does not connect the demonstration to stored enquiries.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/register/clinician" className={primary}>Apply as a clinician</Link>
+          <Link href="/demo/clinician" className={primary}>Open the clinician workspace</Link>
         </div>
       </Article>
     </PageShell>

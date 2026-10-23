@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Article, PageShell } from "@/components/site";
 
-export const metadata: Metadata = { title: "Contact" };
+export const metadata: Metadata = { title: "Help and contact" };
 
 export default function ContactPage() {
   return (
     <PageShell>
       <Article
-        title="Contact"
+        title="Help and contact"
         lede="Send an enquiry if you want a comparison. This address is not an emergency service and cannot book treatment."
       >
         <p>
