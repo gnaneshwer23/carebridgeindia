@@ -144,6 +144,7 @@ export type ProposalDraft = {
   expiresOn: string;
   providerName: string;
   registrationNotes: string;
+  approvedForLiveCases: boolean;
   clinicianName: string;
   registrationBody: string;
   registrationNumber: string;
@@ -176,6 +177,7 @@ export function toDraft(row: PresentableProposal): ProposalDraft {
     expiresOn: row.proposal.expiresOn ?? "",
     providerName: row.providerName,
     registrationNotes: row.registrationNotes ?? "",
+    approvedForLiveCases: row.approvedForLiveCases,
     clinicianName: row.clinicianName ?? "",
     registrationBody: row.registrationBody ?? "",
     registrationNumber: row.registrationNumber ?? "",
