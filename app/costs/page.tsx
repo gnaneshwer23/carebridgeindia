@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ExampleComparison } from "@/components/example-comparison";
 import { Article, PageShell } from "@/components/site";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -13,6 +14,10 @@ export default function CostsPage() {
         title="If the quote is the problem"
         lede="The comparison adds the journey, not just the procedure. A headline saving is shown only when the important costs are known, and it can show that India would cost more."
       >
+        <ExampleComparison />
+        <p>
+          The panel above is a layout example. Your own UK quote, when you have one, is kept separate from a published benchmark such as the PHIN figures below. The benchmark’s source and date are shown on a real proposal, as is the exchange-rate date when a conversion is used.
+        </p>
         <p>
           PHIN’s March 2026 package-price collection reported London average package prices of £15,712 for a hip replacement and £15,689 for a knee replacement. PHIN describes those prices as indicative, and packages do not all include the same things. They are context, not your quote.
         </p>

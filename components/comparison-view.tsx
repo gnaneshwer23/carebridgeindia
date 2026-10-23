@@ -57,7 +57,7 @@ export function ComparisonView({ model }: { model: ComparisonModel }) {
     model.lines.find((line) => line.category === category);
 
   return (
-    <article className="grid gap-6 rounded-xl border border-border bg-card p-5">
+    <article className="grid gap-6 rounded-2xl border border-border bg-card p-5">
       <header className="grid gap-2">
         <p className="text-sm text-muted-foreground">
           Version {model.version}

@@ -10,9 +10,14 @@ export default function WaitingPage() {
   return (
     <PageShell>
       <Article
-        title="If the wait is the problem"
-        lede="CareBridge can put a date or estimate you already have beside a provider-confirmed treatment window. It cannot turn a national waiting list into your personal date."
+        title="Understand whether an alternative date is available"
+        lede="A provider-confirmed treatment window can be set beside a treatment date or estimate you already have. A national waiting list cannot become your personal date."
       >
+        <ul className="grid gap-2">
+          <li>Confirmed: a provider has named a treatment window, with a confirmation date and conditions.</li>
+          <li>Estimate: a date or waiting period you were given, labelled as an estimate.</li>
+          <li>Not supplied: no treatment date has been given. That is left blank. It is not treated as zero weeks.</li>
+        </ul>
         <p>
           NHS England reported about 7.3 million outstanding treatment pathways in July 2026, including 111,379 waiting over 52 weeks. Those are pathways, not people, and they do not say when your procedure would happen.
         </p>

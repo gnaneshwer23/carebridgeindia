@@ -13,11 +13,11 @@ import { getPatientSession, getRevealKey } from "@/lib/auth";
 import { getCaseBundle } from "@/lib/case-data";
 import {
   ACTION_OWNER_LABELS,
-  CONCERN_OPTIONS,
   PROCEDURE_OPTIONS,
   STATUS_LABELS,
   labelFor,
 } from "@/lib/labels";
+import { formatIsoDate } from "@/lib/format";
 import { presentProposal } from "@/lib/present";
 import { deleteEnquiry, discussProceeding, dismissAccessKey } from "@/lib/actions/patient";
 
@@ -44,9 +44,11 @@ export default async function MyCasePage() {
 
   return (
     <PageShell>
-      <div className="mx-auto grid max-w-3xl gap-10 px-5 py-14">
+      <div className="mx-auto grid max-w-3xl gap-8 px-5 py-12 md:py-20">
         <header className="grid gap-3">
-          <p className="text-sm text-muted-foreground">Reference {caseRow.reference}</p>
+          <p className="text-sm text-muted-foreground">
+            {`Reference ${caseRow.reference} · ${labelFor(PROCEDURE_OPTIONS, caseRow.procedure)} · ${STATUS_LABELS[caseRow.status] ?? caseRow.status}`}
+          </p>
           <h1 className="text-4xl">Your case</h1>
           <p className="text-lg text-muted-foreground">
             {`${STATUS_LABELS[caseRow.status] ?? caseRow.status}. This page is not clinical acceptance and it does not reserve a treatment date.`}
@@ -54,55 +56,65 @@ export default async function MyCasePage() {
         </header>
 
         {reveal ? (
-          <section className="grid gap-3 rounded-xl border border-border bg-card p-5">
+          <section className="grid gap-3 rounded-2xl border border-border bg-card p-5">
             <h2 className="text-2xl">Save this access key</h2>
             <p>
               It is shown once. With your reference, it opens this case on another device. Coordinators cannot look it up later.
             </p>
             <p className="font-medium break-all">{reveal}</p>
             <form action={dismissAccessKey}>
-              <Button type="submit" variant="secondary" className="h-11 px-4">
+              <Button type="submit" variant="secondary" className="h-12 px-4">
                 I have saved the key
               </Button>
             </form>
           </section>
         ) : null}
 
-        <dl className="grid gap-3 text-sm">
-          <div>
-            <dt className="font-medium">Concern</dt>
-            <dd>{labelFor(CONCERN_OPTIONS, caseRow.concern)}</dd>
-          </div>
-          <div>
-            <dt className="font-medium">Procedure</dt>
-            <dd>{labelFor(PROCEDURE_OPTIONS, caseRow.procedure)}</dd>
-          </div>
-          <div>
-            <dt className="font-medium">Coordinator</dt>
-            <dd>{bundle.ownerName ?? "Not yet assigned"}</dd>
-          </div>
-          <div>
-            <dt className="font-medium">Next action</dt>
-            <dd>
-              {caseRow.nextAction} · {ACTION_OWNER_LABELS[caseRow.nextActionOwner] ?? caseRow.nextActionOwner}
-            </dd>
-          </div>
-        </dl>
+        <section className="grid gap-3 rounded-2xl border border-border bg-wash p-5 shadow-sm">
+          <p className="text-sm text-muted-foreground">Next action</p>
+          <h2 className="text-3xl">{caseRow.nextAction}</h2>
+          <p>
+            {`${ACTION_OWNER_LABELS[caseRow.nextActionOwner] ?? caseRow.nextActionOwner} · Coordinator: ${bundle.ownerName ?? "Not yet assigned"}`}
+          </p>
+          {visible.length > 0 ? (
+            <a href="#proposals" className="text-base font-medium text-primary underline">
+              Review comparison
+            </a>
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              No proposal has been published. Nothing can be booked from this page.
+            </p>
+          )}
+        </section>
 
-        <section className="grid gap-4">
+        <section id="proposals" className="grid gap-4">
           <h2 className="text-3xl">Proposals</h2>
           {visible.length === 0 ? (
             <p>No proposal has been published. A missing proposal is not a price of zero.</p>
           ) : (
-            visible.map((item) => (
-              <ComparisonView
-                key={item.proposal.id}
-                model={presentProposal(item, {
-                  ukWaitKind: caseRow.waitKind,
-                  ukWaitDetail: caseRow.waitDetail,
-                })}
-              />
-            ))
+            visible.map((item) => {
+              const model = presentProposal(item, {
+                ukWaitKind: caseRow.waitKind,
+                ukWaitDetail: caseRow.waitDetail,
+              });
+              const availability = model.timing.treatmentWindows.length
+                ? "Treatment window supplied"
+                : "Treatment window not supplied";
+              return (
+                <article key={item.proposal.id} className="grid gap-3 rounded-2xl border border-border bg-card p-5">
+                  <h3 className="text-2xl">{model.procedureExact || "Procedure not supplied"}</h3>
+                  <p>{model.result.complete ? "Expected total complete" : "Expected total withheld until every required cost is supplied"}</p>
+                  <p>{availability}</p>
+                  <p>{model.expiresOn ? `Expires ${formatIsoDate(model.expiresOn)}` : "Expiry not supplied"}</p>
+                  <details>
+                    <summary className="cursor-pointer font-medium text-primary">Review comparison</summary>
+                    <div className="mt-4">
+                      <ComparisonView model={model} />
+                    </div>
+                  </details>
+                </article>
+              );
+            })
           )}
         </section>
 
