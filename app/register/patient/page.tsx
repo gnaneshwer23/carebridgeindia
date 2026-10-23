@@ -1,42 +1,19 @@
 import type { Metadata } from "next";
-import { SyntheticRegistration } from "@/components/synthetic-registration";
-import { Article, PageShell } from "@/components/site";
+import { PatientOnboarding } from "@/components/demo/onboarding";
+import { PageShell } from "@/components/site";
 
-export const metadata: Metadata = { title: "Patient account demonstration" };
+export const metadata: Metadata = { title: "Patient demonstration" };
 
 export default function PatientRegisterPage() {
   return (
     <PageShell>
-      <Article
-        title="Create a patient account"
-        lede="Demonstration of the proposed registration sequence. No account, care record, or clinical acceptance is created."
-      >
-        <SyntheticRegistration
-          steps={[
-            {
-              title: "Account",
-              fields: [
-                { id: "email", label: "Email", hint: "Use a sample address such as patient@example.com." },
-              ],
-            },
-            {
-              title: "Eligibility",
-              fields: [
-                { id: "adult", label: "Confirm you are illustrating an adult patient", hint: "Type “adult”. This does not verify identity." },
-              ],
-            },
-            {
-              title: "Contact preferences",
-              fields: [
-                { id: "language", label: "Preferred language" },
-                { id: "timezone", label: "Timezone", hint: "For example, Europe/London." },
-              ],
-            },
-          ]}
-          resultTitle="Demonstration complete"
-          resultBody="No account was created and nothing was stored. Registration in this prototype is not clinical acceptance, and there is no care record to open."
-        />
-      </Article>
+      <div className="mx-auto grid max-w-[1200px] gap-6 px-5 py-10 md:px-8 md:py-14">
+        <h1 className="font-serif text-4xl md:text-5xl">Patient demonstration</h1>
+        <p className="max-w-2xl text-lg leading-relaxed text-[#3a5560]">
+          A short sequence into the fictional dashboard. Procedure is not pre-selected. Not sure is available.
+        </p>
+        <PatientOnboarding />
+      </div>
     </PageShell>
   );
 }

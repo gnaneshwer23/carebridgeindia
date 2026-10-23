@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ExampleComparison } from "@/components/example-comparison";
+import { FullBreakdown } from "@/components/example-comparison";
 import { Article, PageShell } from "@/components/site";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -14,7 +14,7 @@ export default function CostsPage() {
         title="If the quote is the problem"
         lede="The comparison adds the journey, not just the procedure. A headline saving is shown only when the important costs are known, and it can show that India would cost more."
       >
-        <ExampleComparison />
+        <FullBreakdown />
         <p>
           The panel above is a layout example. Your own UK quote, when you have one, is kept separate from a published benchmark such as the PHIN figures below. The benchmark’s source and date are shown on a real proposal, as is the exchange-rate date when a conversion is used.
         </p>

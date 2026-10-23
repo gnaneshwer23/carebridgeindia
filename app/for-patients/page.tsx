@@ -4,43 +4,40 @@ import { Article, PageShell } from "@/components/site";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = { title: "Proposed patient platform" };
+export const metadata: Metadata = { title: "For patients" };
 
-const stages = [
-  ["Register", "You create a demonstration account. That is not clinical acceptance."],
-  ["Assessment", "A named clinician would review records. No clinician is assigned in this prototype."],
-  ["Plan", "A care plan would name owners and tasks. None is issued here."],
-  ["Follow-up", "Questionnaires would be reviewed by staff. Calls are not part of this phase."],
-];
+const primary = cn(buttonVariants(), "h-12 w-fit rounded-[16px] px-5 text-base");
 
 export default function ForPatientsPage() {
   return (
     <PageShell>
       <Article
-        title="Keep your treatment journey connected."
-        lede="This is a proposed continuity-of-care direction. It is not the confirmed CareBridge service. The live comparison remains long waits and high private quotes."
+        title="For patients"
+        lede="The service helps you compare planned treatment in India when a wait is long or a private quote is high. The demonstration shows how a case could continue through assessment, preparation and recovery."
       >
-        <p>
-          The hypothesis is that patients and care teams lose track of records, appointments and recovery updates when care moves between organisations. That hypothesis is not yet confirmed, and this page does not collect a care record.
-        </p>
-        <div className="grid gap-3">
-          {stages.map(([title, copy]) => (
-            <article key={title} className="rounded-2xl border border-border bg-card p-4">
-              <h2 className="text-xl">{title}</h2>
-              <p className="mt-1 text-muted-foreground">{copy}</p>
+        <div className="grid gap-3 md:grid-cols-2">
+          {[
+            ["Compare", "Send a real enquiry. A coordinator reviews it. That is not clinical acceptance."],
+            ["Assessment", "In the demonstration, a named clinician role reviews fictional records."],
+            ["Preparation", "Tasks name who does what. Nothing is booked from the website."],
+            ["Follow-up", "A questionnaire can flag a concern for a clinician to acknowledge."],
+          ].map(([title, copy]) => (
+            <article key={title} className="rounded-[16px] border border-[#D7E3E8] bg-white p-4">
+              <h2 className="font-serif text-xl">{title}</h2>
+              <p className="mt-1">{copy}</p>
             </article>
           ))}
         </div>
         <p>
-          An agent, if one is added later, could prepare drafts and reminders. It would not diagnose, prescribe, decide fitness to travel, or close a clinical concern. A named clinician would have to own those decisions. No such agent is running.
+          Simulated agents prepare drafts and reminders. They do not diagnose, prescribe, decide fitness to travel, or close a clinical concern. A named clinician role owns those decisions in the demonstration. They do not run on a real enquiry.
         </p>
-        <div className="flex flex-wrap gap-4">
-          <Link href="/register/patient" className={cn(buttonVariants(), "h-12 px-5")}>
-            Create a patient account
-          </Link>
-          <Link href="/" className="self-center underline">
-            Back to the treatment comparison
-          </Link>
+        <p>
+          The care record in the demonstration is not a hospital record and it is not connected to the NHS. Creating a demonstration profile does not verify your identity.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/register/patient" className={primary}>Start the patient demonstration</Link>
+          <Link href="/demo/patient" className={primary}>Open the fictional dashboard</Link>
+          <Link href="/enquire" className="self-center underline">Compare my options</Link>
         </div>
       </Article>
     </PageShell>

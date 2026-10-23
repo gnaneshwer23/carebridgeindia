@@ -53,7 +53,7 @@
 }
 
 :root {
-  --background: #f4fbfd;
+  --background: #eef8fc;
   --foreground: #12333d;
   --card: #ffffff;
   --card-foreground: #12333d;
@@ -134,5 +134,26 @@
   }
   h1, h2, h3 {
     font-family: var(--font-source-serif), Georgia, serif;
+    text-wrap: balance;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #0b6b70;
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
