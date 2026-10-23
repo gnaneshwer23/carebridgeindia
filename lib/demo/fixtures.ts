@@ -13,6 +13,8 @@ export const TELEPHONY_ENABLED = false;
 export const RESPONSIBLE_CLINICIAN = "Reviewing clinician (demonstration)";
 export const RESPONSIBLE_COORDINATOR = "Care coordinator (demonstration)";
 export const ACK_DUE_ON = "2026-10-01";
+/** Fixed demonstration clock so overdue examples stay stable during prerender. */
+export const DEMO_TODAY = "2026-10-23";
 
 export const TIMING_NOTE =
   "The UK timing and the treatment window are shown side by side. A consultation is listed separately and is not a treatment date. No weeks-saved figure is calculated.";

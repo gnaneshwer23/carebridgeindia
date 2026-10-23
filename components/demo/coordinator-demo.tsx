@@ -6,6 +6,7 @@ import { useDemo } from "@/components/demo/provider";
 import { DemoBanner, Panel } from "@/components/demo/ui";
 import {
   DEMO_CASES,
+  DEMO_TODAY,
   FOLLOW_UP_LABELS,
   RESPONSIBLE_CLINICIAN,
   acknowledgementOverdue,
@@ -18,8 +19,7 @@ export function CoordinatorDemo() {
   const { state, update } = useDemo();
   const item = getDemoCase(state.activeCase);
   const next = liveNext(item.id, state);
-  const today = new Date().toLocaleDateString("en-CA", { timeZone: "Europe/London" });
-  const overdue = item.id === "D" && acknowledgementOverdue(state, today);
+  const overdue = item.id === "D" && acknowledgementOverdue(state, DEMO_TODAY);
 
   return (
     <div className="grid gap-6">
@@ -29,7 +29,7 @@ export function CoordinatorDemo() {
       <ul className="grid gap-3">
         {DEMO_CASES.map((entry) => {
           const entryNext = liveNext(entry.id, state);
-          const entryOverdue = entry.id === "D" && acknowledgementOverdue(state, today);
+          const entryOverdue = entry.id === "D" && acknowledgementOverdue(state, DEMO_TODAY);
           return (
             <li key={entry.id}>
               <button

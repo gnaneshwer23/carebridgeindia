@@ -8,6 +8,7 @@ import { DemoBanner, Panel, primaryBtn, secondaryBtn } from "@/components/demo/u
 import {
   CLINICIAN_STATUS_LABELS,
   DEMO_CASES,
+  DEMO_TODAY,
   acknowledgementOverdue,
   liveNext,
   type ClinicianStatus,
@@ -114,8 +115,7 @@ export function ClinicianApplication() {
 
 export function ClinicianWorkspace() {
   const { state, update } = useDemo();
-  const today = new Date().toLocaleDateString("en-CA", { timeZone: "Europe/London" });
-  const overdue = acknowledgementOverdue(state, today);
+  const overdue = acknowledgementOverdue(state, DEMO_TODAY);
   const verified = state.exploreRole === "verified";
 
   return (

@@ -4,6 +4,7 @@ import { useDemo } from "@/components/demo/provider";
 import { DemoBanner, Panel, primaryBtn, secondaryBtn } from "@/components/demo/ui";
 import {
   ACK_DUE_ON,
+  DEMO_TODAY,
   FOLLOW_UP_FLOW,
   FOLLOW_UP_LABELS,
   RESPONSIBLE_CLINICIAN,
@@ -18,8 +19,7 @@ import {
 
 export function FollowUpPanel({ audience }: { audience: "patient" | "clinician" }) {
   const { state, update } = useDemo();
-  const today = new Date().toLocaleDateString("en-CA", { timeZone: "Europe/London" });
-  const overdue = acknowledgementOverdue(state, today);
+  const overdue = acknowledgementOverdue(state, DEMO_TODAY);
 
   function submit(form: FormData) {
     const answers = {
