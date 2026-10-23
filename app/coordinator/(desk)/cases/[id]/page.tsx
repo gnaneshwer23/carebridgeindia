@@ -49,6 +49,19 @@ export default async function CasePage(props: {
         </p>
       </header>
 
+      <section className="grid gap-4 rounded-2xl border border-border bg-card p-5">
+        <h2 className="text-2xl">Status and next action</h2>
+        <CaseStatusForm
+          caseId={caseRow.id}
+          status={caseRow.status}
+          nextAction={caseRow.nextAction}
+          nextActionOwner={caseRow.nextActionOwner}
+          responseDueOn={caseRow.responseDueOn ?? ""}
+          pauseReason={caseRow.pauseReason ?? ""}
+          declineReason={caseRow.declineReason ?? ""}
+        />
+      </section>
+
       <section className="grid gap-2 text-sm leading-6">
         <h2 className="text-2xl">Enquiry</h2>
         <p>
@@ -61,19 +74,6 @@ export default async function CasePage(props: {
         {caseRow.responseDueOn && caseRow.responseDueOn < today ? (
           <p>Response date {caseRow.responseDueOn} has passed.</p>
         ) : null}
-      </section>
-
-      <section className="grid gap-4">
-        <h2 className="text-2xl">Status and next action</h2>
-        <CaseStatusForm
-          caseId={caseRow.id}
-          status={caseRow.status}
-          nextAction={caseRow.nextAction}
-          nextActionOwner={caseRow.nextActionOwner}
-          responseDueOn={caseRow.responseDueOn ?? ""}
-          pauseReason={caseRow.pauseReason ?? ""}
-          declineReason={caseRow.declineReason ?? ""}
-        />
       </section>
 
       <section className="grid gap-4">

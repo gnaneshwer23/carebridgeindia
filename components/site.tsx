@@ -11,7 +11,7 @@ const links = [
 
 export function Notice() {
   return (
-    <p className="bg-[#e7eee4] px-5 py-2 text-center text-sm text-foreground">
+    <p className="bg-wash px-5 py-2 text-center text-sm text-foreground">
       Validation prototype. Enquiries are stored for review. No bookings, payments or clinical services are available. Not an emergency service. No NHS affiliation.
     </p>
   );
@@ -20,8 +20,8 @@ export function Notice() {
 export function SiteHeader() {
   return (
     <header className="border-b border-border">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4">
-        <Link href="/" className="font-serif text-2xl tracking-tight">
+      <div className="mx-auto flex max-w-[75rem] items-center justify-between gap-6 px-5 py-4">
+        <Link href="/" className="font-serif text-2xl tracking-tight text-pine">
           CareBridge
           <span className="mt-0.5 block text-[0.65rem] font-sans tracking-[0.18em] text-muted-foreground">
             INDIA
@@ -60,8 +60,8 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-border bg-[#e7eee4] px-5 py-8 text-sm">
-      <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
+    <footer className="mt-auto border-t border-border bg-wash px-5 py-8 text-sm">
+      <div className="mx-auto grid max-w-[75rem] gap-6 md:grid-cols-3">
         <p>
           <strong>CareBridge India</strong>
           <br />
@@ -84,6 +84,10 @@ export function SiteFooter() {
           <Link href="/contact" className="underline">Contact</Link>
           <br />
           <Link href="/coordinator/login" className="underline">Coordinator sign in</Link>
+          <br />
+          <Link href="/for-patients" className="underline">Proposed patient platform</Link>
+          {" · "}
+          <Link href="/for-clinicians" className="underline">Proposed clinician platform</Link>
         </p>
       </div>
     </footer>

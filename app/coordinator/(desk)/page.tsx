@@ -19,14 +19,21 @@ export default async function QueuePage() {
           {rows.map((row) => {
             const overdue = Boolean(row.responseDueOn && row.responseDueOn < today);
             return (
-              <li key={row.id} className="rounded-xl border border-border bg-card px-4 py-4">
-                <Link href={`/coordinator/cases/${row.id}`} className="grid gap-1">
-                  <span className="font-medium">
-                    {row.reference} · {STATUS_LABELS[row.status] ?? row.status}
+              <li key={row.id}>
+                <Link
+                  href={`/coordinator/cases/${row.id}`}
+                  className="grid gap-2 rounded-2xl border border-border bg-card p-5"
+                >
+                  <span className="text-sm text-muted-foreground">{row.reference}</span>
+                  <span className="text-xl font-medium">
+                    {STATUS_LABELS[row.status] ?? row.status}
                     {overdue ? " · Response overdue" : ""}
                   </span>
+                  <span className="text-sm">
+                    {labelFor(CONCERN_OPTIONS, row.concern)} · {labelFor(PROCEDURE_OPTIONS, row.procedure)}
+                  </span>
                   <span className="text-sm text-muted-foreground">
-                    {labelFor(CONCERN_OPTIONS, row.concern)} · {labelFor(PROCEDURE_OPTIONS, row.procedure)} · {row.ownerName ?? "Unassigned"}
+                    Owner: {row.ownerName ?? "Unassigned"}
                   </span>
                   <span className="text-sm">{row.nextAction}</span>
                 </Link>

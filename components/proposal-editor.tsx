@@ -39,6 +39,11 @@ export function ProposalEditor({
           {state.error}
         </p>
       ) : null}
+      <p className="rounded-lg bg-secondary px-4 py-3 text-sm">
+        {draft?.approvedForLiveCases
+          ? "This provider is marked approved for live cases."
+          : "This provider is not approved for live cases. The proposal is for comparison only and does not reserve treatment."}
+      </p>
 
       <div className="grid gap-4 md:grid-cols-2">
         <Field label="Exact procedure" htmlFor="procedureExact">

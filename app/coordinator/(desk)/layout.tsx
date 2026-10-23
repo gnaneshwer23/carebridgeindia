@@ -23,14 +23,19 @@ export default async function DeskLayout({
             Coordinator queue
           </Link>
           <p className="text-sm text-muted-foreground">
-            {staff.name} · validation workspace · no live providers
+            {staff.name} · validation workspace
           </p>
         </div>
-        <form action={logout}>
-          <Button type="submit" variant="secondary" className="h-11 px-4">
-            Sign out
-          </Button>
-        </form>
+        <div className="flex items-center gap-4">
+          <Link href="/coordinator/providers" className="text-sm underline">
+            Providers
+          </Link>
+          <form action={logout}>
+            <Button type="submit" variant="secondary" className="h-11 px-4">
+              Sign out
+            </Button>
+          </form>
+        </div>
       </header>
       <main id="main" className="mx-auto max-w-5xl px-5 py-8">
         {children}
