@@ -1,24 +1,36 @@
 import type { Metadata } from "next";
-import { Article, PageShell } from "@/components/site";
+import Link from "next/link";
+import { Article, PageCard, PageShell, pageAction } from "@/components/site";
 
 export const metadata: Metadata = { title: "How the comparison works" };
+
+const steps = [
+  ["You", "Say whether the wait, the cost, or both brought you here."],
+  ["Coordinator", "The enquiry is acknowledged. That is not clinical acceptance and it does not hold a date."],
+  ["Provider", "A coordinator asks for a patient-specific proposal. You do not upload a medical record on this site."],
+  ["You", "You can ask a question, pause, or decide not to continue. Asking to discuss proceeding does not book treatment or take payment."],
+];
 
 export default function HowPage() {
   return (
     <PageShell>
       <Article
-        title="How the comparison works"
-        lede="You choose a problem, a coordinator gathers a proposal, and you see the same fields every time — including the blanks."
+        title="How it works"
+        lede="You name the concern. A coordinator gathers a proposal. You decide, including a decision to stay."
       >
-        <ol className="grid gap-3">
-          <li className="rounded-2xl border border-border bg-card p-4"><strong>You.</strong> Say whether the wait, the cost, or both brought you here.</li>
-          <li className="rounded-2xl border border-border bg-card p-4"><strong>Coordinator.</strong> The enquiry is acknowledged. That is not clinical acceptance and it does not hold a date.</li>
-          <li className="rounded-2xl border border-border bg-card p-4"><strong>Provider.</strong> A coordinator asks for a patient-specific proposal. You do not upload a medical record on this site.</li>
-          <li className="rounded-2xl border border-border bg-card p-4"><strong>You.</strong> You can ask a question, pause, or decide not to continue. Asking to discuss proceeding does not book treatment or take payment.</li>
-        </ol>
-        <p>
-          UK–India coordination already exists elsewhere. The test here is whether a case-specific comparison is clear enough to support a decision, including a decision to stay.
-        </p>
+        <PageCard>
+          <ol className="grid gap-6">
+            {steps.map(([owner, copy], index) => (
+              <li key={owner + copy}>
+                <p className="font-semibold text-[#0B6B70]">{index + 1}. {owner}</p>
+                <p className="mt-1">{copy}</p>
+              </li>
+            ))}
+          </ol>
+        </PageCard>
+        <Link href="/enquire" className={pageAction}>
+          Compare my options
+        </Link>
       </Article>
     </PageShell>
   );

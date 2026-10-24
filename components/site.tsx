@@ -108,6 +108,19 @@ export function PageShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+export const pageAction = cn(
+  buttonVariants({ size: "lg" }),
+  "h-12 w-fit rounded-[16px] px-5 text-base font-semibold",
+);
+
+export function PageCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-[16px] border border-[#D7E3E8] bg-white p-6 text-base leading-relaxed text-[#12333D] md:p-8 md:text-lg [&_a]:text-[#0B6B70] [&_a]:underline">
+      {children}
+    </div>
+  );
+}
+
 export function Article({
   title,
   lede,
@@ -118,15 +131,13 @@ export function Article({
   children: React.ReactNode;
 }) {
   return (
-    <article>
-      <div className="bg-[#E7F6F4]">
-        <div className="mx-auto max-w-[1200px] px-5 py-12 md:px-8 md:py-16">
-          <h1 className="max-w-3xl font-serif text-[2.125rem] leading-tight md:text-5xl">{title}</h1>
-          {lede ? <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[#3a5560]">{lede}</p> : null}
+    <article className="bg-[#EEF8FC] text-[#12333D]">
+      <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
+        <h1 className="max-w-2xl font-serif text-[2.125rem] leading-[1.12] md:text-5xl">{title}</h1>
+        {lede ? <p className="mt-5 max-w-2xl text-lg leading-relaxed">{lede}</p> : null}
+        <div className="mt-10 grid gap-6 text-base leading-relaxed md:text-lg">
+          {children}
         </div>
-      </div>
-      <div className="mx-auto grid max-w-[1200px] gap-4 px-5 py-10 text-base leading-relaxed md:px-8 md:py-14 [&_a]:underline">
-        {children}
       </div>
     </article>
   );

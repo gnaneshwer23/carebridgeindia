@@ -1,36 +1,37 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Article, PageShell } from "@/components/site";
+import { Article, PageCard, PageShell, pageAction } from "@/components/site";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "For clinicians" };
 
-const primary = cn(buttonVariants(), "h-12 w-fit rounded-[16px] px-5 text-base");
+const secondary = cn(
+  buttonVariants({ variant: "outline", size: "lg" }),
+  "h-12 w-fit rounded-[16px] border-[#D7E3E8] bg-white px-5 text-base font-semibold text-[#12333D]",
+);
 
 export default function ForCliniciansPage() {
   return (
     <PageShell>
       <Article
         title="For clinicians"
-        lede="Apply in the demonstration, then explore a fictional worklist. An application never opens a real patient record."
+        lede="The clinician workspace is a demonstration. An application does not open a real patient record."
       >
-        <ul className="grid gap-3 md:grid-cols-2">
-          {[
-            "Submitted, under review, or more information needed.",
-            "Approved, declined, suspended, or expired.",
-            "A verified fictional role can review assigned demonstration patients only.",
-            "Notes stay in draft until a clinician signs them. Corrections are amendments.",
-          ].map((item) => (
-            <li key={item} className="rounded-[16px] border border-[#D7E3E8] bg-white p-4">{item}</li>
-          ))}
-        </ul>
-        <p>
-          Live access would require verified credentials, a defined scope, multi-factor authentication and an explicit assignment. This prototype does not perform those checks and does not connect the demonstration to stored enquiries.
-        </p>
+        <PageCard>
+          <p>
+            In the demonstration, an application can be submitted, under review, or waiting for more information, and it can later be approved, declined, suspended, or expired.
+          </p>
+          <p className="mt-4">
+            A verified fictional role can review assigned demonstration patients only. Notes stay in draft until that role signs them. Corrections are amendments.
+          </p>
+          <p className="mt-4">
+            Live access would require verified credentials, a defined scope, multi-factor authentication and an explicit assignment. This prototype does not perform those checks and does not connect the demonstration to stored enquiries.
+          </p>
+        </PageCard>
         <div className="flex flex-wrap gap-3">
-          <Link href="/register/clinician" className={primary}>Apply as a clinician</Link>
-          <Link href="/demo/clinician" className={primary}>Open the clinician workspace</Link>
+          <Link href="/register/clinician" className={pageAction}>Apply as a clinician</Link>
+          <Link href="/demo/clinician" className={secondary}>Open the clinician workspace</Link>
         </div>
       </Article>
     </PageShell>

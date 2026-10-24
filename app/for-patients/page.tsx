@@ -1,43 +1,38 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Article, PageShell } from "@/components/site";
+import { Article, PageCard, PageShell, pageAction } from "@/components/site";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "For patients" };
 
-const primary = cn(buttonVariants(), "h-12 w-fit rounded-[16px] px-5 text-base");
+const secondary = cn(
+  buttonVariants({ variant: "outline", size: "lg" }),
+  "h-12 w-fit rounded-[16px] border-[#D7E3E8] bg-white px-5 text-base font-semibold text-[#12333D]",
+);
 
 export default function ForPatientsPage() {
   return (
     <PageShell>
       <Article
         title="For patients"
-        lede="The service helps you compare planned treatment in India when a wait is long or a private quote is high. The demonstration shows how a case could continue through assessment, preparation and recovery."
+        lede="Send a real enquiry if you want a comparison. The demonstration uses fictional cases and does not open your record."
       >
-        <div className="grid gap-3 md:grid-cols-2">
-          {[
-            ["Compare", "Send a real enquiry. A coordinator reviews it. That is not clinical acceptance."],
-            ["Assessment", "In the demonstration, a named clinician role reviews fictional records."],
-            ["Preparation", "Tasks name who does what. Nothing is booked from the website."],
-            ["Follow-up", "A questionnaire can flag a concern for a clinician to acknowledge."],
-          ].map(([title, copy]) => (
-            <article key={title} className="rounded-[16px] border border-[#D7E3E8] bg-white p-4">
-              <h2 className="font-serif text-xl">{title}</h2>
-              <p className="mt-1">{copy}</p>
-            </article>
-          ))}
-        </div>
-        <p>
-          Simulated agents prepare drafts and reminders. They do not diagnose, prescribe, decide fitness to travel, or close a clinical concern. A named clinician role owns those decisions in the demonstration. They do not run on a real enquiry.
-        </p>
-        <p>
-          The care record in the demonstration is not a hospital record and it is not connected to the NHS. Creating a demonstration profile does not verify your identity.
-        </p>
+        <PageCard>
+          <p>
+            A coordinator reviews a real enquiry. That review is not clinical acceptance, and nothing is booked from this site.
+          </p>
+          <p className="mt-4">
+            The demonstration can show assessment tasks, preparation, and a follow-up that flags a concern for a named clinician role to acknowledge. Simulated agents prepare drafts and reminders. They do not diagnose, prescribe, decide fitness to travel, or close a clinical concern, and they do not run on a real enquiry.
+          </p>
+          <p className="mt-4">
+            The care record in the demonstration is not a hospital record and it is not connected to the NHS. Creating a demonstration profile does not verify your identity.
+          </p>
+        </PageCard>
         <div className="flex flex-wrap gap-3">
-          <Link href="/register/patient" className={primary}>Start the patient demonstration</Link>
-          <Link href="/demo/patient" className={primary}>Open the fictional dashboard</Link>
-          <Link href="/enquire" className="self-center underline">Compare my options</Link>
+          <Link href="/enquire" className={pageAction}>Compare my options</Link>
+          <Link href="/register/patient" className={secondary}>Start the patient demonstration</Link>
+          <Link href="/demo/patient" className={secondary}>Open the fictional dashboard</Link>
         </div>
       </Article>
     </PageShell>

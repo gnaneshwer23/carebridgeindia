@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Article, PageShell } from "@/components/site";
+import { Article, PageCard, PageShell, pageAction } from "@/components/site";
 
 export const metadata: Metadata = { title: "Help and contact" };
 
@@ -11,12 +11,17 @@ export default function ContactPage() {
         title="Help and contact"
         lede="Send an enquiry if you want a comparison. This address is not an emergency service and cannot book treatment."
       >
-        <p>
-          Use <Link href="/enquire" className="underline">Compare my options</Link> and keep the reference and access key that follow. If you already have them, open the case from <Link href="/access" className="underline">your access page</Link>.
-        </p>
-        <p>
-          For a complaint about how an enquiry was handled, use the <Link href="/complaints" className="underline">complaints page</Link>. For urgent medical help, use local emergency services. Do not send medical records by email.
-        </p>
+        <PageCard>
+          <p>
+            Use <Link href="/enquire">Compare my options</Link> and keep the reference and access key that follow. If you already have them, open the case from <Link href="/access">your access page</Link>.
+          </p>
+          <p className="mt-4">
+            For a complaint about how an enquiry was handled, use the <Link href="/complaints">complaints page</Link>. For urgent medical help, use local emergency services. Do not send medical records by email.
+          </p>
+        </PageCard>
+        <Link href="/enquire" className={pageAction}>
+          Compare my options
+        </Link>
       </Article>
     </PageShell>
   );
