@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { EnquiryForm } from "@/components/enquiry-form";
-import { Article, PageShell } from "@/components/site";
+import { PageHero, PageSection, PageShell } from "@/components/site";
 
 export const metadata: Metadata = { title: "Compare my options" };
 
@@ -10,14 +10,20 @@ export default function EnquirePage(props: {
 }) {
   return (
     <PageShell>
-      <Article
-        title="Compare my options"
-        lede="Tell us whether NHS wait, UK private cost, or both is the reason. Do not include a medical history. Sending this form does not reserve treatment."
-      >
-        <Suspense fallback={<p>Loading the form…</p>}>
-          <EnquiryGate searchParams={props.searchParams} />
-        </Suspense>
-      </Article>
+      <article>
+        <PageHero
+          tone="ink"
+          title="Compare my options"
+          lede="Tell us whether NHS wait, UK private cost, or both is the reason. Do not include a medical history. Sending this form does not reserve treatment."
+        />
+        <PageSection className="cb-band-mist">
+          <div className="mx-auto max-w-2xl">
+            <Suspense fallback={<p className="text-deep/70">Loading the form…</p>}>
+              <EnquiryGate searchParams={props.searchParams} />
+            </Suspense>
+          </div>
+        </PageSection>
+      </article>
     </PageShell>
   );
 }

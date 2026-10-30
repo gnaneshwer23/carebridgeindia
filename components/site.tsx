@@ -1,16 +1,9 @@
 import Link from "next/link";
 import { SiteChat } from "@/components/site-chat";
+import { SiteHeader } from "@/components/site-header";
 import { buttonVariants } from "@/components/ui/button";
 import { WHATSAPP_DISPLAY, whatsappHref } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
-
-const links = [
-  { href: "/waiting", label: "NHS wait" },
-  { href: "/costs", label: "UK costs" },
-  { href: "/how-it-works", label: "How it works" },
-  { href: "/for-patients", label: "For patients" },
-  { href: "/for-clinicians", label: "For clinicians" },
-];
 
 export const primaryCta = cn(
   buttonVariants({ size: "lg" }),
@@ -22,14 +15,6 @@ export const secondaryCta = cn(
   "cb-cta h-12 rounded-2xl border-line bg-white/90 px-5 text-base font-semibold text-deep backdrop-blur-sm hover:bg-white",
 );
 
-const primary = primaryCta;
-const secondary = secondaryCta;
-
-const whatsappHeader = cn(
-  buttonVariants({ variant: "ghost", size: "lg" }),
-  "h-12 rounded-2xl px-3 text-base font-semibold text-teal hover:bg-mist hover:text-teal-deep",
-);
-
 export function Notice() {
   return (
     <p className="border-b border-line/70 bg-mist px-5 py-2.5 text-center text-sm leading-6 text-deep">
@@ -39,79 +24,7 @@ export function Notice() {
   );
 }
 
-export function SiteHeader() {
-  return (
-    <header className="sticky top-0 z-40 border-b border-line/80 bg-paper/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-5 py-3.5 md:px-8">
-        <Link href="/" className="font-serif text-[1.65rem] leading-none tracking-tight text-pine">
-          CareBridge
-          <span className="mt-1 block font-sans text-[0.65rem] font-semibold tracking-[0.2em] text-deep/55">
-            INDIA · FOR THE UK
-          </span>
-        </Link>
-        <nav className="hidden items-center gap-1 text-[15px] lg:flex" aria-label="Primary">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-lg px-2.5 py-2 text-deep/80 transition-colors hover:bg-mist hover:text-deep"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="hidden items-center gap-2 lg:flex">
-          <a
-            href={whatsappHref("Hello CareBridge — I’d like to talk through a UK–India comparison.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={whatsappHeader}
-          >
-            WhatsApp
-          </a>
-          <Link href="/demo" className={secondary}>
-            Explore demo
-          </Link>
-          <Link href="/enquire" className={primary}>
-            Compare my options
-          </Link>
-        </div>
-        <div className="flex items-center gap-2 lg:hidden">
-          <a
-            href={whatsappHref()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-xl px-2 py-2 text-sm font-semibold text-teal"
-          >
-            WhatsApp
-          </a>
-          <Link href="/enquire" className={cn(primary, "h-11 px-4 text-sm")}>
-            Compare
-          </Link>
-        </div>
-      </div>
-      <details className="border-t border-line px-5 py-3 lg:hidden">
-        <summary className="cursor-pointer text-base font-medium text-deep">Menu</summary>
-        <nav className="grid gap-3 py-4 text-base" aria-label="Mobile">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
-          <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="font-semibold text-teal">
-            WhatsApp {WHATSAPP_DISPLAY}
-          </a>
-          <Link href="/demo" className="font-semibold text-teal">
-            Explore demo
-          </Link>
-          <Link href="/enquire" className="font-semibold">
-            Compare my options
-          </Link>
-        </nav>
-      </details>
-    </header>
-  );
-}
+export { SiteHeader };
 
 export function SiteFooter() {
   return (
@@ -169,33 +82,126 @@ export function PageShell({ children }: { children: React.ReactNode }) {
 
 export const pageAction = cn(primaryCta, "w-fit");
 
-export function PageCard({ children }: { children: React.ReactNode }) {
+export function PageCard({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className="rounded-2xl border border-line bg-white/90 p-6 text-base leading-relaxed text-deep shadow-[0_1px_0_rgba(18,51,61,0.04)] md:p-8 md:text-lg [&_a]:text-teal [&_a]:underline [&_a]:underline-offset-2">
+    <div
+      className={cn(
+        "rounded-2xl border border-line bg-white/90 p-6 text-base leading-relaxed text-deep shadow-[0_1px_0_rgba(18,51,61,0.04)] md:p-8 md:text-lg [&_a]:text-teal [&_a]:underline [&_a]:underline-offset-2",
+        className,
+      )}
+    >
       {children}
     </div>
   );
 }
 
-export function Article({
+type Tone = "mist" | "ink" | "paper";
+
+const heroTone: Record<Tone, string> = {
+  mist: "cb-atmosphere",
+  ink: "cb-hero-plane text-white",
+  paper: "bg-white",
+};
+
+export function PageHero({
   title,
   lede,
+  tone = "mist",
   children,
 }: {
   title: string;
   lede?: string;
-  children: React.ReactNode;
+  tone?: Tone;
+  children?: React.ReactNode;
 }) {
+  const onInk = tone === "ink";
   return (
-    <article className="cb-atmosphere text-deep">
-      <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
-        <p className="font-serif text-3xl tracking-tight text-pine md:text-4xl">CareBridge</p>
-        <h1 className="mt-4 max-w-2xl font-serif text-[2.125rem] leading-[1.1] tracking-tight md:text-5xl">
+    <header className={cn("relative overflow-hidden", heroTone[tone])}>
+      {tone === "mist" ? <div className="cb-page-glow pointer-events-none absolute inset-0" aria-hidden /> : null}
+      <div className="relative mx-auto max-w-[1200px] px-5 py-16 md:px-8 md:py-24">
+        <p
+          className={cn(
+            "cb-reveal font-serif text-3xl tracking-tight md:text-4xl",
+            onInk ? "text-aqua" : "text-pine",
+          )}
+        >
+          CareBridge
+        </p>
+        <h1
+          className={cn(
+            "cb-reveal-delay mt-5 max-w-3xl font-serif text-[2.35rem] leading-[1.05] tracking-tight md:text-[3.25rem]",
+            onInk ? "text-white" : "text-deep",
+          )}
+        >
           {title}
         </h1>
-        {lede ? <p className="mt-5 max-w-2xl text-lg leading-relaxed text-deep/85">{lede}</p> : null}
-        <div className="mt-10 grid gap-6 text-base leading-relaxed md:text-lg">{children}</div>
+        {lede ? (
+          <p
+            className={cn(
+              "cb-reveal-late mt-6 max-w-2xl text-lg leading-relaxed md:text-xl",
+              onInk ? "text-aqua/85" : "text-deep/85",
+            )}
+          >
+            {lede}
+          </p>
+        ) : null}
+        {children ? <div className="cb-reveal-late mt-10">{children}</div> : null}
       </div>
+    </header>
+  );
+}
+
+export function PageSection({
+  children,
+  className,
+  narrow,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  narrow?: boolean;
+}) {
+  return (
+    <section className={cn("relative", className)}>
+      <div
+        className={cn(
+          "mx-auto px-5 py-14 md:px-8 md:py-20",
+          narrow ? "max-w-3xl" : "max-w-[1200px]",
+        )}
+      >
+        {children}
+      </div>
+    </section>
+  );
+}
+
+export function PageCtaBand({ children }: { children: React.ReactNode }) {
+  return (
+    <section className="border-t border-line bg-ink">
+      <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-5 px-5 py-12 md:px-8 md:py-14">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+/** Compact interior article — used by forms and utility pages. */
+export function Article({
+  title,
+  lede,
+  children,
+  tone = "mist",
+}: {
+  title: string;
+  lede?: string;
+  children: React.ReactNode;
+  tone?: Tone;
+}) {
+  return (
+    <article>
+      <PageHero title={title} lede={lede} tone={tone} />
+      <PageSection narrow className="bg-paper">
+        <div className="grid gap-8 text-base leading-relaxed text-deep md:text-lg">{children}</div>
+      </PageSection>
     </article>
   );
 }

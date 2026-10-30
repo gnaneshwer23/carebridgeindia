@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Article, PageCard, PageShell, pageAction } from "@/components/site";
+import { PageCtaBand, PageHero, PageSection, PageShell, pageAction } from "@/components/site";
 
 export const metadata: Metadata = { title: "How the comparison works" };
 
@@ -30,26 +30,44 @@ const steps = [
 export default function HowPage() {
   return (
     <PageShell>
-      <Article
-        title="How it works"
-        lede="Prepare your concern. Compare a personalised India proposal against your UK wait and costs. Decide — including deciding not to travel."
-      >
-        <PageCard>
-          <ol className="grid gap-8">
+      <article>
+        <PageHero
+          title="How it works"
+          lede="Prepare your concern. Compare a personalised India proposal against your UK wait and costs. Decide — including deciding not to travel."
+        />
+
+        <PageSection className="bg-white">
+          <ol className="grid gap-0">
             {steps.map((step, index) => (
-              <li key={step.owner + step.copy} className="grid gap-1 border-l-2 border-teal/35 pl-4">
-                <p className="text-sm font-semibold tracking-wide text-teal">
-                  {index + 1}. {step.phase} · {step.owner}
-                </p>
-                <p className="text-deep/90">{step.copy}</p>
+              <li
+                key={step.owner + step.copy}
+                className="grid gap-4 border-t border-line py-10 first:border-t-0 first:pt-0 md:grid-cols-[7rem_1fr] md:gap-10 md:py-12"
+              >
+                <p className="font-serif text-5xl leading-none text-teal/25 md:text-6xl">{index + 1}</p>
+                <div>
+                  <p className="text-sm font-semibold tracking-[0.14em] text-teal">
+                    {step.phase}
+                    <span className="mx-2 text-line">·</span>
+                    {step.owner}
+                  </p>
+                  <p className="mt-3 max-w-2xl text-xl leading-relaxed text-deep md:text-2xl md:leading-snug">
+                    {step.copy}
+                  </p>
+                </div>
               </li>
             ))}
           </ol>
-        </PageCard>
-        <Link href="/enquire" className={pageAction}>
-          Compare my options
-        </Link>
-      </Article>
+        </PageSection>
+
+        <PageCtaBand>
+          <p className="max-w-xl font-serif text-2xl leading-snug text-white md:text-3xl">
+            Start with the concern that brought you here.
+          </p>
+          <Link href="/enquire" className={pageAction}>
+            Compare my options
+          </Link>
+        </PageCtaBand>
+      </article>
     </PageShell>
   );
 }
