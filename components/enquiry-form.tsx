@@ -50,7 +50,7 @@ export function EnquiryForm({ defaultConcern }: { defaultConcern: string }) {
   return (
     <form
       action={action}
-      className="grid gap-8"
+      className="grid gap-8 rounded-2xl border border-line bg-white/95 p-6 md:p-8"
       noValidate
       onSubmit={(event) => {
         const error = stepThreeError(new FormData(event.currentTarget));
@@ -60,8 +60,8 @@ export function EnquiryForm({ defaultConcern }: { defaultConcern: string }) {
         }
       }}
     >
-      <p className="text-sm text-muted-foreground">Step {step} of 3</p>
-      <h2 ref={headingRef} tabIndex={-1} className="text-2xl outline-none">
+      <p className="text-sm font-medium tracking-wide text-teal">Step {step} of 3</p>
+      <h2 ref={headingRef} tabIndex={-1} className="font-serif text-3xl tracking-tight text-deep outline-none">
         {step === 1 ? "Your concern" : step === 2 ? "The comparison" : "How to reach you"}
       </h2>
       {alert ? (

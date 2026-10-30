@@ -18,7 +18,7 @@ export default function TermsPage() {
             You can pause, stop or delete an enquiry. Discussing whether to proceed does not authorise treatment or payment. Any later coordination fee would have to be disclosed before it is charged, and treatment charges would be paid to the clinical provider. No fee is collected in this release.
           </p>
           <p className="mt-4">
-            The service is not an emergency service, is not part of the NHS, and does not decide whether you are fit to travel. If you need urgent care, use local emergency services.
+            The service is for UK adults considering planned care. It is not an emergency service, is not part of the NHS, and does not decide whether you are fit to travel. If you need urgent care in the UK, use NHS 111 or local emergency services.
           </p>
         </PageCard>
       </Article>

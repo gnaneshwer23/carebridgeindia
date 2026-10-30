@@ -17,7 +17,7 @@ export default function StandardsPage() {
     <PageShell>
       <Article
         title="Care standards"
-        lede="No provider is approved for live cases in this prototype. Accreditation, where it is later recorded, is not a guarantee of your outcome."
+        lede="No provider is approved for live cases in this prototype. For UK adults comparing India care, accreditation — where it is later recorded — is not a guarantee of your outcome."
       >
         <PageCard>
           <ul className="grid gap-4">

@@ -12,7 +12,7 @@ export default function EnquirePage(props: {
     <PageShell>
       <Article
         title="Compare my options"
-        lede="Tell us whether time, cost, or both is the reason. Do not include a medical history. Sending this form does not reserve treatment."
+        lede="Tell us whether NHS wait, UK private cost, or both is the reason. Do not include a medical history. Sending this form does not reserve treatment."
       >
         <Suspense fallback={<p>Loading the form…</p>}>
           <EnquiryGate searchParams={props.searchParams} />

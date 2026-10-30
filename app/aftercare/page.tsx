@@ -15,7 +15,7 @@ export default function AftercarePage() {
     <PageShell>
       <Article
         title="Recovery and aftercare"
-        lede="A proposal has to name who does what before any departure. If that plan cannot be agreed, the pathway should stop."
+        lede="Before any UK patient departs, a proposal has to name who does what for recovery. If that plan cannot be agreed, the pathway should stop."
       >
         <PageCard>
           <dl className="grid gap-6">

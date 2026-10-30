@@ -1,7 +1,7 @@
 export const CONCERN_OPTIONS = [
-  { value: "time", label: "My wait is too long" },
-  { value: "cost", label: "My quote is too expensive" },
-  { value: "both", label: "Both the wait and the cost" },
+  { value: "time", label: "NHS wait is too long" },
+  { value: "cost", label: "UK private quote is too expensive" },
+  { value: "both", label: "Both the NHS wait and the UK cost" },
 ] as const;
 
 export const PROCEDURE_OPTIONS = [

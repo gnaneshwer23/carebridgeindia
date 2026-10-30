@@ -133,9 +133,9 @@ export function PatientOnboarding() {
             <legend className="text-base">What brings you to the demonstration?</legend>
             {(
               [
-                ["time", "My wait is too long"],
-                ["cost", "My private quote is too expensive"],
-                ["both", "Both the wait and the cost"],
+                ["time", "NHS wait is too long"],
+                ["cost", "UK private quote is too expensive"],
+                ["both", "Both the NHS wait and the UK cost"],
               ] as const
             ).map(([value, label]) => (
               <label key={value} className={`flex min-h-12 items-center gap-3 rounded-[16px] border px-4 text-base ${concern === value ? "border-[#0B6B70] bg-[#E7F6F4]" : "border-[#D7E3E8]"}`}>
